@@ -1,6 +1,10 @@
 # YOPO-Sim
 
-A high-performance, multi-sensor supported off-road environment simulator.
+A high-performance, multi-sensor supported off-road environment simulator based on Unity engine.
+
+> \[!NOTE]
+>
+> The code will be released soon.
 
 ## Sensor Support
 Modified from [UnitySensors](https://github.com/Field-Robotics-Japan/UnitySensors).
