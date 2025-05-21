@@ -24,7 +24,7 @@ Provided by [Vista](https://assetstore.unity.com/packages/tools/terrain/procedur
 <!-- Randomized environment video -->
 https://github.com/user-attachments/assets/b92b3cd3-88b8-4fed-8599-bd7ade1459f1
 ## Point Cloud Map Generation
-Inspired by [Flightmare](https://github.com/uzh-rpg/flightmare_unity).
+Inspired by [Flightmare](https://github.com/uzh-rpg/flightmare_unity), but with performance improvements.
 - 2D Map
 - 3D Map 
 
