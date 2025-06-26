@@ -1,0 +1,13 @@
+{
+    "name": "com.tju-aerial-robotics.diablo-wheel-control",
+    "displayName": "Diablo Wheel Control",
+    "version": "0.0.1",
+    "unity": "2022.3",
+    "description": "A Unity package for simulating and controlling Diablo robot.",
+    "dependencies": {},
+    "author": {
+        "name": "Hongyu Cao",
+        "email": "1274653465@qq.com",
+        "url": "https://github.com/Bob-Eric"
+    }
+}

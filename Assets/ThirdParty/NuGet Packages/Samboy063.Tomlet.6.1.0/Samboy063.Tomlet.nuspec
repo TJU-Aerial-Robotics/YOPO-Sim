@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Samboy063.Tomlet</id>
+    <version>6.1.0</version>
+    <title>Tomlet</title>
+    <authors>Sam Byass</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/SamboyCoding/Tomlet</projectUrl>
+    <description>Tomlet allows consumption and creation of TOML files (often used as configuration files) in .NET applications.
+            It supports serialization and deserialization of objects to and from TOML, and is compliant with version 1.0.0 of the TOML specification.</description>
+    <tags>toml</tags>
+    <repository type="git" url="https://github.com/SamboyCoding/Tomlet.git" branch="refs/heads/master" commit="e096da28e88dc0eb94f59e99868161cf62e13065" />
+    <dependencies>
+      <group targetFramework=".NETFramework3.5" />
+      <group targetFramework="net6.0" />
+      <group targetFramework="net7.0" />
+      <group targetFramework="net8.0" />
+      <group targetFramework="net9.0" />
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,18 @@
+{
+    "name": "DiabloWheelControl",
+    "rootNamespace": "",
+    "references": [
+        "GUID:625bfc588fb96c74696858f2c467e978",
+        "GUID:ba58c43074cf72549aa2ac5937dae44b",
+        "GUID:5db6cbfd5d0e86a46862a70f4b4067f2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

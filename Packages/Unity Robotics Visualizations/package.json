@@ -1,0 +1,10 @@
+{
+  "name": "com.unity.robotics.visualizations",
+  "version": "0.7.0-preview",
+  "displayName": "Unity Robotics Visualizations",
+  "description": "Components for displaying specific ROS messages",
+  "unity": "2020.2",
+  "unityRelease": "0b9",
+  "dependencies": {},
+  "_fingerprint": "10c58b197f05bc2347fb30d0123cd22392b5240d"
+}

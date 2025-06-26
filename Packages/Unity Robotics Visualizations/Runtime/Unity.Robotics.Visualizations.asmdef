@@ -1,0 +1,31 @@
+{
+    "name": "Unity.Robotics.Visualizations",
+    "rootNamespace": "",
+    "references": [
+        "GUID:625bfc588fb96c74696858f2c467e978",
+        "GUID:b1ef917f7a8a86a4eb639ec2352edbf8",
+        "GUID:ba58c43074cf72549aa2ac5937dae44b",
+        "GUID:5db6cbfd5d0e86a46862a70f4b4067f2"
+    ],
+    "includePlatforms": [
+        "Editor",
+        "LinuxStandalone64",
+        "macOSStandalone",
+        "WindowsStandalone32",
+        "WindowsStandalone64"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.robotics.urdf-importer",
+            "expression": "0.1.0",
+            "define": "URDF_IMPORTER"
+        }
+    ],
+    "noEngineReferences": false
+}
