@@ -1,13 +1,11 @@
 ﻿using System;
 
-namespace CSPID
-{
+namespace CSPID {
 
     /// <summary>
     /// A PID (proportional-integral-derivative) controller.
     /// </summary>
-    public class PIDController : IPIDController
-    {
+    public class PIDController : IPIDController {
         private readonly object _lock = new object();
 
         private readonly Range<double> _unitRange = new Range<double>(-1, 1);
@@ -26,11 +24,9 @@ namespace CSPID
         /// Gets or sets the maximum control variable change per cycle.
         /// </summary>
         /// <value>The maximum control variable change per cycle.</value>
-        public double MaximumStep
-        {
+        public double MaximumStep {
             get { return _maximumStep; }
-            set
-            {
+            set {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException($"Expected {nameof(value)} to be greater than or equal to 0");
 
@@ -42,8 +38,7 @@ namespace CSPID
         /// Gets or sets the proportional gain.
         /// </summary>
         /// <value>The proportional gain.</value>
-        public double ProportionalGain
-        {
+        public double ProportionalGain {
             get { return _proportionalGain; }
             set { lock (_lock) _proportionalGain = value; }
         }
@@ -52,8 +47,7 @@ namespace CSPID
         /// Gets or sets the integral gain.
         /// </summary>
         /// <value>The integral gain.</value>
-        public double IntegralGain
-        {
+        public double IntegralGain {
             get { return _integralGain; }
             set { lock (_lock) _integralGain = value; }
         }
@@ -62,8 +56,7 @@ namespace CSPID
         /// Gets or sets the derivative gain.
         /// </summary>
         /// <value>The derivative gain.</value>
-        public double DerivativeGain
-        {
+        public double DerivativeGain {
             get { return _derivativeGain; }
             set { lock (_lock) _derivativeGain = value; }
         }
@@ -79,8 +72,7 @@ namespace CSPID
                 errorRange.Minimum,
                 errorRange.Maximum,
                 controlRange.Minimum,
-                controlRange.Maximum)
-        { }
+                controlRange.Maximum) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:CSPID.Controller"/> class.
@@ -93,8 +85,7 @@ namespace CSPID
             double minimumError,
             double maximumError,
             double minimumControl,
-            double maximumControl)
-        {
+            double maximumControl) {
             _errorRange = new Range<double>(minimumError, maximumError);
             _controlRange = new Range<double>(minimumControl, maximumControl);
         }
@@ -105,12 +96,10 @@ namespace CSPID
         /// <returns>The control variable value.</returns>
         /// <param name="error">The process variable error.</param>
         /// <param name="elapsed">The time elapsed since the last control value was calculated.</param>
-        public double Next(double error, double elapsed)
-        {
+        public double Next(double error, double elapsed) {
             double control;
 
-            lock (_lock)
-            {
+            lock (_lock) {
                 error = error
                     .Clamp(_errorRange)
                     .Scale(_errorRange, _unitRange);
@@ -131,10 +120,8 @@ namespace CSPID
         }
 
         // MODIFIED: Added Reset method to reset the controller state
-        public void Reset()
-        {
-            lock (_lock)
-            {
+        public void Reset() {
+            lock (_lock) {
                 _integrator = 0;
                 _previousError = 0;
                 _previousControl = 0;

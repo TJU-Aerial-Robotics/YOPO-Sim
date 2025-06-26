@@ -5,10 +5,8 @@ using RosMessageTypes.Nav;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 using UnityEngine.Assertions;
 
-namespace Diablo
-{
-    public class DiabloControlROS : MonoBehaviour
-    {
+namespace Diablo {
+    public class DiabloControlROS : MonoBehaviour {
         [SerializeField] private DiabloControl diabloControl;
         [SerializeField] private bool subscribeTwistTopic = true;
         [SerializeField] private string twistTopic = "/cmd_vel";
@@ -22,8 +20,7 @@ namespace Diablo
         OdometryMsg _odomLocalVelocityMsg;
         private float _odomTimer;
         private Rigidbody _rigidbody;
-        void Awake()
-        {
+        void Awake() {
             _odomMsg = new();
             _odomMsg.header.frame_id = "map";
             _odomMsg.child_frame_id = "base_link";
@@ -34,20 +31,17 @@ namespace Diablo
             _rigidbody = diabloControl.GetComponent<Rigidbody>();
             _frequency_inv = 1.0f / odomUpdateFrequency;
         }
-        void Start()
-        {
+        void Start() {
             _rosConnector = ROSConnection.GetOrCreateInstance();
             _rosConnector.RegisterPublisher<OdometryMsg>(odomTopic);
             _rosConnector.RegisterPublisher<OdometryMsg>(odomLocalVelocityTopic);
-            if (subscribeTwistTopic)
-            {
+            if (subscribeTwistTopic) {
                 _rosConnector.Subscribe<TwistMsg>(twistTopic, TwistCallback);
             }
         }
 
 
-        private void TwistCallback(TwistMsg msg)
-        {
+        private void TwistCallback(TwistMsg msg) {
             // Unity uses left-handed coordinate system, ROS uses right-handed coordinate system
             bool isBraking = Mathf.Approximately((float)msg.linear.x, 0);
             // Debug.Log("Twist msg: " + msg.linear.x + ", " + msg.angular.z + ", is breaking: " + isBraking);
@@ -55,8 +49,7 @@ namespace Diablo
             diabloControl.SetKeyboardControl(false);
         }
 
-        private void Update()
-        {
+        private void Update() {
             _odomTimer += Time.deltaTime;
             if (_odomTimer < _frequency_inv) return;
 
@@ -69,13 +62,11 @@ namespace Diablo
             _odomMsg.header.stamp.sec = sec;
             _odomMsg.header.stamp.nanosec = (uint)((Time.time - _odomMsg.header.stamp.sec) * 1e9);
 
-            if (useRigidbodyPosition)
-            {
+            if (useRigidbodyPosition) {
                 _odomMsg.pose.pose.position = _rigidbody.position.To<FLU>();
                 _odomMsg.pose.pose.orientation = _rigidbody.rotation.To<FLU>();
             }
-            else
-            {
+            else {
                 _odomMsg.pose.pose.position = transform.position.To<FLU>();
                 _odomMsg.pose.pose.orientation = transform.rotation.To<FLU>();
             }

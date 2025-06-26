@@ -1,10 +1,8 @@
-﻿namespace CSPID
-{
+﻿namespace CSPID {
     /// <summary>
     /// A PID (proportional-integral-derivative) controller.
     /// </summary>
-    public interface IPIDController
-    {
+    public interface IPIDController {
         /// <summary>
         /// Gets or sets the maximum control variable change per cycle.
         /// </summary>

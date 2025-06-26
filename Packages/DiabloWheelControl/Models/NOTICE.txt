@@ -1,0 +1,2 @@
+The fbx model is generated from https://github.com/DDTRobot/diablo_ros2/tree/main/diablo_visualise/diablo_simulation/meshes
+The original model is licensed under Apache License 2.0.

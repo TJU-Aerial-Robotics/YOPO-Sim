@@ -99,3 +99,4 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 .vscode
 Assets/ThirdParty/PinwheelStudio
+Assets/ThirdParty/TerrainDemoScene_URP

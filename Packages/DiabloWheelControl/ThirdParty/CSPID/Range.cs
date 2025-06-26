@@ -1,13 +1,11 @@
 ﻿using System;
 
 #pragma warning disable RECS0017 // Possible compare of value type with 'null'
-namespace CSPID
-{
+namespace CSPID {
     /// <summary>
     /// An inclusive range.
     /// </summary>
-    public struct Range<T> where T : IComparable<T>
-    {
+    public struct Range<T> where T : IComparable<T> {
         /// <summary>
         /// Gets the minimum value.
         /// </summary>
@@ -25,8 +23,7 @@ namespace CSPID
         /// </summary>
         /// <param name="minimum">The minimum value.</param>
         /// <param name="maximum">The maximum value.</param>
-        public Range(T minimum, T maximum)
-        {
+        public Range(T minimum, T maximum) {
             if (minimum == null)
                 throw new ArgumentNullException(nameof(minimum));
 

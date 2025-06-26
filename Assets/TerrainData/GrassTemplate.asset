@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a494996f1948477488df3f3132395655, type: 3}
+  m_Name: GrassTemplate
+  m_EditorClassIdentifier: 
+  m_renderMode: 2
+  m_texture: {fileID: 2800000, guid: 022ed3fd7d2cc204588495977e5af760, type: 3}
+  m_textureVariants: []
+  m_prefab: {fileID: 398929321252300881, guid: 4e6885e0d11bd224fa27617a4657c329, type: 3}
+  m_prefabVariants: []
+  m_primaryColor: {r: 0.044267416, g: 1, b: 0, a: 1}
+  m_secondaryColor: {r: 0.7484276, g: 0.699668, b: 0, a: 1}
+  m_minHeight: 0.05
+  m_maxHeight: 0.3
+  m_minWidth: 0.05
+  m_maxWidth: 0.3
+  m_noiseSpread: 0.1
+  m_holeEdgePadding: 0
+  m_useInstancing: 1
+  m_pivotOffset: 0
+  m_bendFactor: 1
+  m_layer: 0
+  m_alignToSurface: 0
+  m_castShadow: 0
+  m_receiveShadow: 0
+  m_density: 500

@@ -1,10 +1,8 @@
 using CSPID;
 using UnityEngine;
 
-namespace Diablo
-{
-    public class DiabloControl : MonoBehaviour
-    {
+namespace Diablo {
+    public class DiabloControl : MonoBehaviour {
         [SerializeField, Header("Keyboard Params")] private bool useKeyboard = true;
         [SerializeField] private float velocityMax = 2;
         [SerializeField] private float angularVelocityMax = Mathf.PI;
@@ -30,8 +28,7 @@ namespace Diablo
         private float velocity, angularVelocity;
         private bool isBraking, isJumping;
 
-        void Awake()
-        {
+        void Awake() {
             rigidbody = GetComponent<Rigidbody>();
             rigidbody.mass = mass;
             rigidbody.centerOfMass = centreOfMass;
@@ -39,34 +36,29 @@ namespace Diablo
             suspensionSpringOriginal = wheelCollider.suspensionSpring;
             targetEularAngleY = transform.rotation.eulerAngles.y;
 
-            pidController = new(-5, 5, -motorTorqueMax, motorTorqueMax)
-            {
+            pidController = new(-5, 5, -motorTorqueMax, motorTorqueMax) {
                 MaximumStep = double.MaxValue,
                 ProportionalGain = Kp,
                 IntegralGain = Kp / Ti,
                 DerivativeGain = Kp * Td
             };
         }
-        void Update()
-        {
+        void Update() {
             if (useKeyboard)
                 KeyboardCarControl();
 
-            if (showActualWheel)
-            {
+            if (showActualWheel) {
                 wheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
                 actualWheelVisual.gameObject.SetActive(true);
                 actualWheelVisual.position = pos;
                 actualWheelVisual.localScale = new Vector3(wheelCollider.radius * 2, wheelCollider.radius * 2, wheelCollider.radius * 2);
             }
-            else
-            {
+            else {
                 actualWheelVisual.gameObject.SetActive(false);
             }
         }
 
-        private void KeyboardCarControl()
-        {
+        private void KeyboardCarControl() {
             velocity = Input.GetAxis("Vertical") * velocityMax;
             angularVelocity = Input.GetAxis("Horizontal") * angularVelocityMax;
             isBraking = Input.GetKey(KeyCode.LeftControl);
@@ -74,10 +66,8 @@ namespace Diablo
 
         }
 
-        private void CarControl(float deltaTime)
-        {
-            if (!Mathf.Approximately(velocity, 0))
-            {
+        private void CarControl(float deltaTime) {
+            if (!Mathf.Approximately(velocity, 0)) {
                 float realVelocity = transform.InverseTransformDirection(rigidbody.velocity).z;
                 float errorVelocity = velocity - realVelocity;
 
@@ -86,8 +76,7 @@ namespace Diablo
                 wheelCollider.motorTorque = wheelTorque;
                 wheelCollider.brakeTorque = 0;
             }
-            else
-            {
+            else {
                 wheelCollider.motorTorque = 0;
                 pidController.Reset();
             }
@@ -97,38 +86,31 @@ namespace Diablo
             if (targetEularAngleY > 180) targetEularAngleY -= 360;
             else if (targetEularAngleY < -180) targetEularAngleY += 360;
 
-            if (isBraking)
-            {
+            if (isBraking) {
                 wheelCollider.motorTorque = 0;
                 wheelCollider.brakeTorque = brakeTorque;
                 pidController.Reset();
             }
-            else
-            {
+            else {
                 wheelCollider.brakeTorque = 0;
             }
-            if (isJumping)
-            {
-                wheelCollider.suspensionSpring = new()
-                {
+            if (isJumping) {
+                wheelCollider.suspensionSpring = new() {
                     spring = jumpSpringStrength,
                     damper = 0,
                     targetPosition = jumpTargetPosition,
                 };
             }
-            else
-            {
+            else {
                 wheelCollider.suspensionSpring = suspensionSpringOriginal;
             }
         }
-        private void FixedUpdate()
-        {
+        private void FixedUpdate() {
             UpdateUprightForce();
             CarControl(Time.fixedDeltaTime);
         }
 
-        private void UpdateUprightForce()
-        {
+        private void UpdateUprightForce() {
             var currentRotation = transform.rotation;
             var targetRotation = Quaternion.Euler(0, targetEularAngleY, 0);
             var deltaRotation = targetRotation * Quaternion.Inverse(currentRotation);
@@ -146,20 +128,17 @@ namespace Diablo
 
             rigidbody.AddTorque(torque);
         }
-        public void SetCarState(float velocity, float angularVelocity, bool isBraking = false, bool isJumping = false)
-        {
+        public void SetCarState(float velocity, float angularVelocity, bool isBraking = false, bool isJumping = false) {
             this.velocity = velocity;
             this.angularVelocity = angularVelocity;
             this.isBraking = isBraking;
             this.isJumping = isJumping;
         }
-        public void SetKeyboardControl(bool useKeyboard)
-        {
+        public void SetKeyboardControl(bool useKeyboard) {
             this.useKeyboard = useKeyboard;
         }
 
-        void OnDrawGizmos()
-        {
+        void OnDrawGizmos() {
             if (showCenterOfMass)
                 if (rigidbody != null)
                     Gizmos.DrawSphere(transform.TransformPoint(rigidbody.centerOfMass), 0.1f);
