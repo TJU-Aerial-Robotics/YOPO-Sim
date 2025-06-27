@@ -932,8 +932,8 @@ MonoBehaviour:
   TextureFolderName: Textures
   TextureFilePrefix: depth_
   tomlFileName: data.toml
-  terrainFileName: terrain.ply
-  treeFileName: tree.ply
+  terrainFileName: terrain
+  treeFileName: tree
 --- !u!1 &1011066311
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +990,7 @@ MonoBehaviour:
   _depthImageManager: {fileID: 388494354}
   _diabloControl: {fileID: 1294134667}
   _tomlDataManager: {fileID: 841876186}
-  _terrainRoundNum: 2
+  _terrainRoundNum: 10
   _poissonRoundNum: 2
   _dataManager: {fileID: 998770230}
   _isDebug: 1
@@ -1519,7 +1519,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetFrameRate: 60
   _runInBackground: 1
-  _enableVSync: 0
+  _enableVSync: 1
+  _vSyncCount: 3
 --- !u!4 &1928054228
 Transform:
   m_ObjectHideFlags: 0

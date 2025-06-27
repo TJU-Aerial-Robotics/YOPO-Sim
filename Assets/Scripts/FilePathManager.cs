@@ -8,8 +8,8 @@ namespace Diablo.Utils {
         public string TextureFolderName = "Textures";
         public string TextureFilePrefix = "depth_";
         public string tomlFileName = "data.toml";
-        public string terrainFileName = "terrain.ply";
-        public string treeFileName = "tree.ply";
+        public string terrainFileName = "terrain";
+        public string treeFileName = "tree";
         public void ClearData() {
             if (Directory.Exists(GetFullDataFolderPath())) {
                 Directory.Delete(GetFullDataFolderPath(), true);

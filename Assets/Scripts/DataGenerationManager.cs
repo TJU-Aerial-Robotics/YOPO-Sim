@@ -109,6 +109,7 @@ namespace Diablo {
                 string tomlFullPath = _dataManager.GetFullTomlFilePath(sceneIndex);
                 _tomlDataManager.SaveData(tomlFullPath);
             }
+            _terrainSeed = _terrainSeedStart;
             GameSettings.Instance.ChangeSettings(targetFrameRateBackup, enableVSync: enableVSyncBackup);
         }
     }
