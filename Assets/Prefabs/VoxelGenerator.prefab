@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7103813715934392651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4158536700481339660}
+  - component: {fileID: 7909217565265690850}
+  - component: {fileID: 1006213340624497888}
+  m_Layer: 0
+  m_Name: VoxelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4158536700481339660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7103813715934392651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 75, y: 5, z: 75}
+  m_LocalScale: {x: 150, y: 10, z: 150}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7909217565265690850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7103813715934392651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90553245adb50fa419f707413d4f6a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelSize: 0.15
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  _listenKeyInput: 0
+  _drawDebug: 0
+  _verbose: 0
+  _saveFile: 1
+  _pointCloudFileType: 1
+  _coordinateType: 1
+  _pointCloudFolderName: PointCloud
+  _pointCloudFileName: terrain
+--- !u!114 &1006213340624497888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7103813715934392651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afa8509c65dc1045800dc131d091955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelSize: 0.2
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  _listenKeyInput: 0
+  _drawDebug: 0
+  _verbose: 0
+  _saveFile: 1
+  _pointCloudFileType: 1
+  _coordinateType: 1
+  _pointCloudFolderName: PointCloud
+  _pointCloudFileName: tree
+  _objectDensity: 2
+  _depth: 5
+  _voxelCoarsestSize: 3.2

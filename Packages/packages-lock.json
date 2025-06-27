@@ -41,7 +41,7 @@
         "com.unity.mathematics": "1.2.6",
         "com.unity.collections": "1.2.4"
       },
-      "hash": "50055e657952eacbec53d8b172269748c5206efd"
+      "hash": "3d69ed51fa2c9031db3ee83f6b0d66ea14a89d75"
     },
     "com.unity.burst": {
       "version": "1.8.22",
@@ -254,6 +254,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.cn"
+    },
+    "com.yasirkula.ingamedebugconsole": {
+      "version": "https://github.com/yasirkula/UnityIngameDebugConsole.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "80c0c42131d4824f9ff6439eda11c2378251fe6d"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

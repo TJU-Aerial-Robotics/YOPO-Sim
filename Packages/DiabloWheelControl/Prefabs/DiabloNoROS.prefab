@@ -320,8 +320,8 @@ MonoBehaviour:
   mass: 20
   centreOfMass: {x: 0, y: -0.1, z: 0}
   wheelCollider: {fileID: 8024322591471675014}
-  motorTorqueMax: 15
-  brakeTorque: 15
+  motorTorqueMax: 20
+  brakeTorque: 20
   jumpTargetPosition: 0.1
   jumpSpringStrength: 8000
   uprightSpringStrength: 400

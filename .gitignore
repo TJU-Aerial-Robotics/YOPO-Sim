@@ -100,3 +100,6 @@ InitTestScene*.unity*
 .vscode
 Assets/ThirdParty/PinwheelStudio
 Assets/ThirdParty/TerrainDemoScene_URP
+Assets/ThirdParty/TextMesh Pro
+TrainingData
+PointCloud

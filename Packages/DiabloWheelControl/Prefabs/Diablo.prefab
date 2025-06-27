@@ -72,6 +72,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5747697784310462361}
   m_SourcePrefab: {fileID: 100100000, guid: 4256778bd255f464eb8229a1a19a7679, type: 3}
+--- !u!114 &888079072146393695 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1919650457061766598, guid: 4256778bd255f464eb8229a1a19a7679,
+    type: 3}
+  m_PrefabInstance: {fileID: 1653068309373632409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8470934721784451388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64ef815ae6f8f14698052ae52c67e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8470934721784451388 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7169219204595822245, guid: 4256778bd255f464eb8229a1a19a7679,
@@ -90,8 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423bda50c90bd6c42a419a5fac41a3a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diabloControl: {fileID: 1919650457061766598, guid: 4256778bd255f464eb8229a1a19a7679,
-    type: 3}
+  diabloControl: {fileID: 888079072146393695}
   subscribeTwistTopic: 1
   twistTopic: /cmd_vel
   odomTopic: /odom

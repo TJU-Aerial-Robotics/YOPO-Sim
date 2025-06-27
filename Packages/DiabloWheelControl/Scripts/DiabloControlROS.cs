@@ -1,9 +1,8 @@
 using RosMessageTypes.Geometry;
 using Unity.Robotics.ROSTCPConnector;
 using UnityEngine;
-using RosMessageTypes.Nav;
 using Unity.Robotics.ROSTCPConnector.ROSGeometry;
-using UnityEngine.Assertions;
+using RosMessageTypes.Nav;
 
 namespace Diablo {
     public class DiabloControlROS : MonoBehaviour {
