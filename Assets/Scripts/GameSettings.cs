@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnitySensors.Attribute;
 
-namespace Diablo.Utils {
+namespace YOPO.SIM {
     public class GameSettings : MonoBehaviour {
         [SerializeField] private int _targetFrameRate = 60;
         [SerializeField] private bool _runInBackground = true;
@@ -10,6 +11,7 @@ namespace Diablo.Utils {
         public int TargetFrameRate => _targetFrameRate;
         public bool RunInBackground => _runInBackground;
         public bool EnableVSync => _enableVSync;
+
         private void Awake() {
             if (Instance == null) {
                 Instance = this;
@@ -20,6 +22,7 @@ namespace Diablo.Utils {
             }
             ApplySettings();
         }
+
         private void OnValidate() {
             ApplySettings();
         }
@@ -30,6 +33,7 @@ namespace Diablo.Utils {
             _enableVSync = enableVSync;
             ApplySettings();
         }
+
         private void ApplySettings() {
             // Apply the settings to the game
             // Debug.Log($"Applying Game Settings: Target Frame Rate: {_targetFrameRate}, Run In Background: {_runInBackground}, Enable VSync: {_enableVSync}");

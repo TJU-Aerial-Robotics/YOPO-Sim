@@ -1,116 +1,85 @@
-using System.Collections;
-using System.Collections.Generic;
-using Pinwheel.Vista;
-using UnityEngine;
-using Diablo.Utils;
-using VoxelGenerator;
 using System;
-
-namespace Diablo {
-    public class PCGManager : MonoBehaviour {
-        // TODO: Use delegate to make the code more modular
-        [SerializeField] private LocalProceduralBiome _localProceduralBiome;
-        [SerializeField] private VistaManager _vistaManager;
-        [SerializeField] private int _terrainSeedStart;
-        [SerializeField, ReadOnly] private int _terrainSeed;
-        [SerializeField] private PoissonGenerator _poissonGenerator;
-        [SerializeField] private int _poissonSeedStart;
-        [SerializeField, ReadOnly] private int _poissonSeed;
-        [SerializeField] private VoxelGeneratorOverlap _voxelGeneratorTree;
-        [SerializeField] private VoxelGeneratorRaycast _voxelGeneratorTerrain;
-        [SerializeField] private DepthImageManager _depthImageManager;
-        [SerializeField] private DiabloControl _diabloControl;
-        [SerializeField] private TomlDataManager _tomlDataManager;
-        [SerializeField, Range(0, 10)] private int _terrainRoundNum = 1;
-        [SerializeField, Range(0, 10)] private int _poissonRoundNum = 1;
-        [SerializeField] private DataManager _dataManager;
-        [SerializeField] private bool _isDebug = false;
-        private int _imageIndexLast = 0;
-        public int sceneIndex { get => _terrainSeed; }
-        void Start() {
-            _localProceduralBiome.seed = _terrainSeed;
-            StartCoroutine(_vistaManager.ForceGenerate());
+using System.Collections;
+using UnityEngine;
+using UnitySensors.Attribute;
+namespace YOPO.SIM {
+    public class DataGenerationManager : MonoBehaviour {
+        [Serializable]
+        class DataGenerationSettings {
+            [Range(0, 10)] public int terrainRoundNum;
+            [Range(0, 10)] public int poissonRoundNum;
+            public string dataFolderName;
         }
+        [SerializeField] private FilePathManager _filePathManager;
+        [SerializeField] private int _terrainSeedStart;
+        [SerializeField] private int _poissonSeedStart;
+        [SerializeField, ReadOnly] private int _terrainSeed;
+        [SerializeField, ReadOnly] private int _poissonSeed;
+        [SerializeField]
+        private DataGenerationSettings _trainingSettings = new() {
+            terrainRoundNum = 1,
+            poissonRoundNum = 1,
+            dataFolderName = "TrainingData"
+        };
+        [SerializeField]
+        private DataGenerationSettings _testingSettings = new() {
+            terrainRoundNum = 1,
+            poissonRoundNum = 1,
+            dataFolderName = "TestingData"
+        };
+        [SerializeField] private bool _isDebug = false;
+
         void Update() {
             if (_isDebug && Input.GetKeyDown(KeyCode.Space)) {
-                StartCoroutine(RunForAll(_terrainRoundNum, _poissonRoundNum));
+                StartCoroutine(GenerateData());
             }
         }
-        void OnValidate() {
-            if (_localProceduralBiome && _localProceduralBiome.seed != _terrainSeed) {
-                _localProceduralBiome.seed = _terrainSeed;
-                _vistaManager.ForceGenerate();
-            }
 
-            if (_poissonGenerator && _poissonGenerator.seed != _poissonSeed) {
-                _poissonGenerator.seed = _poissonSeed;
-                _poissonGenerator.Init();
-                _poissonGenerator.GeneratorPoints();
-            }
-        }
-        IEnumerator SavePointCloud() {
-            _localProceduralBiome.seed = _terrainSeed;
-            yield return _vistaManager.ForceGenerate();
-
-            _voxelGeneratorTree.SetFileProperties(true, folderName: _dataManager.GetFullSceneFolderPath(sceneIndex), fileName: _dataManager.GetTreeFileName());
-            _voxelGeneratorTerrain.SetFileProperties(true, folderName: _dataManager.GetFullSceneFolderPath(sceneIndex), fileName: _dataManager.GetTerrainFileName());
-            yield return _voxelGeneratorTree.GeneratePointCloud();
-            _voxelGeneratorTree.ClearPointCloud();
-            yield return _voxelGeneratorTerrain.GeneratePointCloud();
-            _voxelGeneratorTerrain.ClearPointCloud();
-        }
-        IEnumerator SampleAndSaveDepth() {
-            var samplingPoints = _poissonGenerator.SamplingAndGetPoints(_poissonSeed);
-
-            var rb = _diabloControl.GetComponent<Rigidbody>();
-            rb.isKinematic = true;
-            for (int i = 0; i < samplingPoints.Count; i++) {
-                var samplingPoint = samplingPoints[i];
-                var imageFileName = _dataManager.GetTextrueFileName(_imageIndexLast + i);
-                var imageFullPath = _dataManager.GetFullTextureFilePath(sceneIndex, _imageIndexLast + i);
-
-                var rot = Quaternion.LookRotation(samplingPoint.direction);
-                Debug.Log($"Sampling Point {i}: {samplingPoint.point}, {rot.eulerAngles}");
-                rb.position = samplingPoint.point;
-                rb.rotation = rot;
-                _diabloControl.targetEularAngleY = rot.eulerAngles.y;
-
-
-                yield return new WaitForFixedUpdate();
-                yield return new WaitForEndOfFrame();
-
-                // startPos ans startYaw in unity follows left-hand rule, while in toml follows right-hand rule
-                var startPos = new List<float> { samplingPoint.point.z, -samplingPoint.point.x };
-                var startYaw = 360.0f - rot.eulerAngles.y;
-                Debug.Log($"Start yaw in FLU: {startYaw}");
-                _tomlDataManager.AddData(imageFileName, startPos, startYaw);
-
-                _depthImageManager.SaveImage(imageFullPath);
-            }
-            rb.isKinematic = false;
-            _imageIndexLast += samplingPoints.Count;
-        }
-        IEnumerator RunForAll(int terrainRoundNum, int poissonRoundNum) {
+        IEnumerator GenerateData() {
             int targetFrameRateBackup = GameSettings.Instance.TargetFrameRate;
             bool enableVSyncBackup = GameSettings.Instance.EnableVSync;
             GameSettings.Instance.ChangeSettings(0, enableVSync: false);
-            _dataManager.ClearData();
-            int total_poissonSeed = 0;
-            for (int terrainSeed = _terrainSeedStart; terrainSeed < terrainRoundNum + _terrainSeedStart; terrainSeed++) {
-                _terrainSeed = terrainSeed;
-                yield return SavePointCloud();
-                _tomlDataManager.Init();
-                _imageIndexLast = 0;
-                for (int poissonSeed = _poissonSeedStart; poissonSeed < poissonRoundNum + _poissonSeedStart; poissonSeed++) {
-                    _poissonSeed = total_poissonSeed;
-                    yield return SampleAndSaveDepth();
-                    total_poissonSeed++;
-                }
-                string tomlFullPath = _dataManager.GetFullTomlFilePath(sceneIndex);
-                _tomlDataManager.SaveData(tomlFullPath);
-            }
+
+            // Traverse _terrainRoundNum terrain seeds
             _terrainSeed = _terrainSeedStart;
+            _poissonSeed = _poissonSeedStart;
+            yield return RunTrainingOrTesting(true);
+            yield return RunTrainingOrTesting(false);
+
             GameSettings.Instance.ChangeSettings(targetFrameRateBackup, enableVSync: enableVSyncBackup);
+        }
+
+        private IEnumerator RunTrainingOrTesting(bool isTraining = true) {
+            var settings = isTraining ? _trainingSettings : _testingSettings;
+
+            string dataFolderName = settings.dataFolderName;
+            int terrainRoundNum = settings.terrainRoundNum;
+            int poissonRoundNum = settings.poissonRoundNum;
+
+            _filePathManager.SetDataFolderName(dataFolderName);
+            _filePathManager.DeleteDataFolder();
+            yield return RunTerrainPoissonIterations(terrainRoundNum, poissonRoundNum);
+        }
+
+        private IEnumerator RunTerrainPoissonIterations(int terrainRoundNum, int poissonRoundNum) {
+            for (int i = 0; i < terrainRoundNum; i++) {
+                int sceneIndex = _terrainSeed;
+                yield return DataGenerationEvents.TriggerSavePointCloud(_terrainSeed, sceneIndex, _filePathManager);
+                DataGenerationEvents.RaiseBeforePoissonGeneration(this, EventArgs.Empty);
+
+                // Traverse _poissonRoundNum poisson seeds
+                for (int j = 0; j < poissonRoundNum; j++) {
+                    yield return DataGenerationEvents.TriggerSampleAndSaveImages(sceneIndex, _poissonSeed, _filePathManager);
+                    _poissonSeed++;
+                }
+                DataGenerationEvents.RaiseAfterPoissonGeneration(this,
+                    new DataGenerationEvents.AfterPoissonGenerationEventArgs {
+                        SceneIndex = sceneIndex,
+                        FilePathManager = _filePathManager
+                    });
+
+                _terrainSeed++;
+            }
         }
     }
 }

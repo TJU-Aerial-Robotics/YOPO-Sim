@@ -1,50 +1,52 @@
 using System.IO;
 using UnityEngine;
 
-namespace Diablo.Utils {
-    public class DataManager : MonoBehaviour {
-        public string DataFolderName = "TrainingData";
-        public string SceneFolderPrefix = "Scene_";
-        public string TextureFolderName = "Textures";
-        public string TextureFilePrefix = "depth_";
-        public string tomlFileName = "data.toml";
-        public string terrainFileName = "terrain";
-        public string treeFileName = "tree";
-        public void ClearData() {
-            if (Directory.Exists(GetFullDataFolderPath())) {
-                Directory.Delete(GetFullDataFolderPath(), true);
+namespace YOPO.SIM {
+    public class FilePathManager : MonoBehaviour {
+        [SerializeField] private string dataFolderName = "TrainingData";
+        [SerializeField] public string sceneFolderPrefix = "Scene_";
+        [SerializeField] private string imageFolderName = "Textures";
+        [SerializeField] private string tomlFileName = "data.toml";
+        [SerializeField] private string terrainFileName = "terrain";
+        [SerializeField] private string treeFileName = "tree";
+
+        private void CreateFolderIfNotExists(string folderPath) {
+            if (!Directory.Exists(folderPath)) {
+                Directory.CreateDirectory(folderPath);
             }
         }
-        public string GetFullDataFolderPath() {
-            var basePath = Directory.GetParent(Application.dataPath).FullName;
-            string dataPath = Path.Combine(basePath, DataFolderName);
-            if (!Directory.Exists(dataPath)) {
-                Directory.CreateDirectory(dataPath);
+        private void DeleteFolderIfExists(string folderPath) {
+            if (Directory.Exists(folderPath)) {
+                Directory.Delete(folderPath, true);
             }
+        }
+
+        public void DeleteDataFolder() {
+            DeleteFolderIfExists(GetDataFolderPath());
+        }
+
+        private string GetDataFolderPath() {
+            var basePath = Directory.GetParent(Application.dataPath).FullName;
+            string dataPath = Path.Combine(basePath, dataFolderName);
+            CreateFolderIfNotExists(dataPath);
             return dataPath;
         }
-        public string GetFullSceneFolderPath(int sceneIndex) {
-            string scenePath = Path.Combine(GetFullDataFolderPath(), $"{SceneFolderPrefix}{sceneIndex}");
-            if (!Directory.Exists(scenePath)) {
-                Directory.CreateDirectory(scenePath);
-            }
+
+        public string GetSceneFolderPath(int sceneIndex) {
+            string scenePath = Path.Combine(GetDataFolderPath(), $"{sceneFolderPrefix}{sceneIndex}");
+            CreateFolderIfNotExists(scenePath);
             return scenePath;
         }
-        public string GetFullTextureFolderPath(int sceneIndex) {
-            string texturePath = Path.Combine(GetFullSceneFolderPath(sceneIndex), TextureFolderName);
-            if (!Directory.Exists(texturePath)) {
-                Directory.CreateDirectory(texturePath);
-            }
+        public string GetTextureFolderPath(int sceneIndex) {
+            string texturePath = Path.Combine(GetSceneFolderPath(sceneIndex), imageFolderName);
+            CreateFolderIfNotExists(texturePath);
             return texturePath;
         }
-        public string GetTextrueFileName(int textureIndex) {
-            return $"{TextureFilePrefix}{textureIndex}.exr";
+        public string GetImageFilePath(int sceneIndex, string imageFileName) {
+            return Path.Combine(GetTextureFolderPath(sceneIndex), imageFileName);
         }
-        public string GetFullTextureFilePath(int sceneIndex, int textureIndex) {
-            return Path.Combine(GetFullTextureFolderPath(sceneIndex), GetTextrueFileName(textureIndex));
-        }
-        public string GetFullTomlFilePath(int sceneIndex) {
-            return Path.Combine(GetFullSceneFolderPath(sceneIndex), tomlFileName);
+        public string GetTomlFilePath(int sceneIndex) {
+            return Path.Combine(GetSceneFolderPath(sceneIndex), tomlFileName);
         }
         public string GetTreeFileName() {
             return treeFileName;
@@ -53,5 +55,8 @@ namespace Diablo.Utils {
             return terrainFileName;
         }
 
+        public void SetDataFolderName(string dataFolderName) {
+            this.dataFolderName = dataFolderName;
+        }
     }
 }

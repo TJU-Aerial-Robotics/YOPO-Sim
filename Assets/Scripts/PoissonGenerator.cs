@@ -37,6 +37,7 @@ class PoissonGenerator : MonoBehaviour {
         _realCandidateOffset = transform.position - new Vector3(transform.lossyScale.x, -transform.lossyScale.y, transform.lossyScale.z) / 2;
     }
     public void GeneratorPoints() {
+        //TODO: Rewrite it with Burst and Jobs
         _samplingPoints.Clear();
         // FIXME: If there is an obstacle in the center, the sampling points will be empty
         List<Vector2> spawnPoints = new List<Vector2> { _sampleRegionSize / 2 };

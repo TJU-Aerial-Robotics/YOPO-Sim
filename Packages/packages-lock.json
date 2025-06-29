@@ -41,7 +41,7 @@
         "com.unity.mathematics": "1.2.6",
         "com.unity.collections": "1.2.4"
       },
-      "hash": "3d69ed51fa2c9031db3ee83f6b0d66ea14a89d75"
+      "hash": "fcaf140b9d30f9c1b1a62f5462497aab78c558f9"
     },
     "com.unity.burst": {
       "version": "1.8.22",
@@ -157,17 +157,18 @@
       }
     },
     "com.unity.robotics.ros-tcp-connector": {
-      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector",
+      "version": "https://github.com/Bob-Eric/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "c27f00c6cf750d2d0564349b3039d19aa3925e7c"
+      "hash": "569e181409cae3a0f23555d8364e6317bb1880f3"
     },
     "com.unity.robotics.visualizations": {
-      "version": "file:Unity Robotics Visualizations",
+      "version": "https://github.com/Bob-Eric/ROS-TCP-Connector.git?path=/com.unity.robotics.visualizations",
       "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "569e181409cae3a0f23555d8364e6317bb1880f3"
     },
     "com.unity.searcher": {
       "version": "4.9.2",
