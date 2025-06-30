@@ -22,8 +22,8 @@ namespace YOPO.SIM {
         }
 
         // Image sampling and saving events
-        public static Func<int, int, FilePathManager, IEnumerator> SampleAndSaveImagesCoroutine;
-        public static IEnumerator TriggerSampleAndSaveImages(int sceneIndex, int poissonSeed, FilePathManager filePathManager) {
+        public static Func<int, uint, FilePathManager, IEnumerator> SampleAndSaveImagesCoroutine;
+        public static IEnumerator TriggerSampleAndSaveImages(int sceneIndex, uint poissonSeed, FilePathManager filePathManager) {
             yield return SampleAndSaveImagesCoroutine?.Invoke(sceneIndex, poissonSeed, filePathManager);
         }
 

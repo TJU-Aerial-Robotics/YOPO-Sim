@@ -5,16 +5,16 @@ using UnitySensors.Attribute;
 namespace YOPO.SIM {
     public class DataGenerationManager : MonoBehaviour {
         [Serializable]
-        class DataGenerationSettings {
+        public class DataGenerationSettings {
             [Range(0, 10)] public int terrainRoundNum;
             [Range(0, 10)] public int poissonRoundNum;
             public string dataFolderName;
         }
         [SerializeField] private FilePathManager _filePathManager;
         [SerializeField] private int _terrainSeedStart;
-        [SerializeField] private int _poissonSeedStart;
+        [SerializeField] private uint _poissonSeedStart;
         [SerializeField, ReadOnly] private int _terrainSeed;
-        [SerializeField, ReadOnly] private int _poissonSeed;
+        [SerializeField, ReadOnly] private uint _poissonSeed;
         [SerializeField]
         private DataGenerationSettings _trainingSettings = new() {
             terrainRoundNum = 1,
@@ -28,6 +28,27 @@ namespace YOPO.SIM {
             dataFolderName = "TestingData"
         };
         [SerializeField] private bool _isDebug = false;
+        private bool _isBusy = false;
+        private bool _isGenerating = false;
+
+        public DataGenerationSettings TrainingSettings { get => _trainingSettings; set => _trainingSettings = value; }
+        public DataGenerationSettings TestingSettings { get => _testingSettings; set => _testingSettings = value; }
+
+        void Start() {
+            Loader.OnBeforeSceneSwitch += CouldSwitchScene;
+        }
+
+        void OnDestroy() {
+            Loader.OnBeforeSceneSwitch -= CouldSwitchScene;
+        }
+
+        bool CouldSwitchScene() {
+            if (_isBusy) {
+                Debug.LogWarning("Data generation is in progress. Please wait until it finishes.");
+                return false;
+            }
+            return true;
+        }
 
         void Update() {
             if (_isDebug && Input.GetKeyDown(KeyCode.Space)) {
@@ -35,7 +56,16 @@ namespace YOPO.SIM {
             }
         }
 
+        public void StartDataGeneration() {
+            if (_isBusy || _isGenerating) {
+                Debug.LogWarning("Data generation is already in progress.");
+                return;
+            }
+            StartCoroutine(GenerateData());
+        }
+
         IEnumerator GenerateData() {
+            _isGenerating = true;
             int targetFrameRateBackup = GameSettings.Instance.TargetFrameRate;
             bool enableVSyncBackup = GameSettings.Instance.EnableVSync;
             GameSettings.Instance.ChangeSettings(0, enableVSync: false);
@@ -47,6 +77,7 @@ namespace YOPO.SIM {
             yield return RunTrainingOrTesting(false);
 
             GameSettings.Instance.ChangeSettings(targetFrameRateBackup, enableVSync: enableVSyncBackup);
+            _isGenerating = false;
         }
 
         private IEnumerator RunTrainingOrTesting(bool isTraining = true) {
@@ -63,8 +94,10 @@ namespace YOPO.SIM {
 
         private IEnumerator RunTerrainPoissonIterations(int terrainRoundNum, int poissonRoundNum) {
             for (int i = 0; i < terrainRoundNum; i++) {
-                int sceneIndex = _terrainSeed;
+                int sceneIndex = (int)_terrainSeed;
+                _isBusy = true;
                 yield return DataGenerationEvents.TriggerSavePointCloud(_terrainSeed, sceneIndex, _filePathManager);
+                _isBusy = false;
                 DataGenerationEvents.RaiseBeforePoissonGeneration(this, EventArgs.Empty);
 
                 // Traverse _poissonRoundNum poisson seeds

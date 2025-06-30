@@ -79,7 +79,7 @@ namespace YOPO.SIM {
 
             Debug.Log($"Saved to {fileFullPath}");
         }
-        public IEnumerator SampleAndSaveImages(int sceneIndex, int poissonSeed, FilePathManager filePathManager) {
+        public IEnumerator SampleAndSaveImages(int sceneIndex, uint poissonSeed, FilePathManager filePathManager) {
             var samplingPoints = _poissonGenerator.SamplingAndGetPoints(poissonSeed);
 
             _diabloRigidbody.isKinematic = true;

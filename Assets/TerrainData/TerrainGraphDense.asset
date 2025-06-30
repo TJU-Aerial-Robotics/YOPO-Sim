@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd3d01eddcedb04c8e9bd76ec8c3819, type: 3}
-  m_Name: TerrainGraph
+  m_Name: TerrainGraphDense
   m_EditorClassIdentifier: 
   m_nodeData:
   - typeInfo:
@@ -18,7 +18,7 @@ MonoBehaviour:
     jsonData: '{"m_groupId":"","m_id":"8b96d2cf-3c14-4ad1-abfb-a2bc80fb71e1","m_visualState":{"m_position":{"x":945.9515380859375,"y":360.4070739746094},"m_collapsed":false},"m_shouldSplitExecution":false,"m_isBypassed":false,"m_densityMultiplier":1.0,"m_verticalScaleMultiplier":1.0,"m_horizontalScaleMultiplier":1.0,"m_minRotation":-360.0,"m_maxRotation":360.0,"m_rotationMultiplier":1.0,"m_seed":0}'
   - typeInfo:
       fullName: Pinwheel.Vista.Graph.PointsNode
-    jsonData: '{"m_groupId":"","m_id":"685797ee-610d-4a44-9512-8aff28cccb1b","m_visualState":{"m_position":{"x":242.12960815429688,"y":401.0348205566406},"m_collapsed":false},"m_shouldSplitExecution":false,"m_isBypassed":false,"m_spacing":{"x":25.0,"y":25.0}}'
+    jsonData: '{"m_groupId":"","m_id":"685797ee-610d-4a44-9512-8aff28cccb1b","m_visualState":{"m_position":{"x":242.12960815429688,"y":401.0348205566406},"m_collapsed":false},"m_shouldSplitExecution":false,"m_isBypassed":false,"m_spacing":{"x":15.0,"y":15.0}}'
   - typeInfo:
       fullName: Pinwheel.Vista.Graph.SpreadNode
     jsonData: '{"m_groupId":"","m_id":"eb165d34-89c3-4ba9-af4f-3480900a90bf","m_visualState":{"m_position":{"x":478.2666931152344,"y":400.666748046875},"m_collapsed":false},"m_shouldSplitExecution":false,"m_isBypassed":false,"m_count":15,"m_distance":0.5609999895095825,"m_seed":0,"m_keepSourcePoints":false}'
