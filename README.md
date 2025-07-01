@@ -132,6 +132,7 @@ We would like to express our gratitude to the following projects and creators fo
 - **[UnitySensors](https://github.com/Field-Robotics-Japan/UnitySensors)**: For providing the core sensor simulation framework.
 - **[ROS-TCP-Connector](https://github.com/Unity-Technologies/ROS-TCP-Connector)**: For enabling seamless integration with ROS for real-time data streaming.
 - **[Vista](https://assetstore.unity.com/packages/tools/terrain/procedural-terrain-hexmap-vista-personal-edition-297327)** and **[Unity Terrain - URP Demo Scene](https://assetstore.unity.com/packages/p/unity-terrain-urp-demo-scene-213197)**: For the assets used to generate randomized terrain and vegetation.
+- **[diablo_ros2](https://github.com/DDTRobot/diablo_ros2.git)**: For providing the vehicle model used in the simulation.
 - **CodeMonkey's [Kitchen Chaos](https://unitycodemonkey.com/kitchenchaoscourse.php) course**: For providing valuable learning resources and inspiration.
 - **[CSPID](https://github.com/w-bonelli/CSPID.git)**: A PID Controller library used for vehicle control in the simulation.
 - **[Tomlet](https://github.com/SamboyCoding/Tomlet)**: A TOML parser library used for data management in the simulation.
