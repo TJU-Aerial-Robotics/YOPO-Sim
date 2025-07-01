@@ -2302,7 +2302,7 @@ MonoBehaviour:
   _inflateRadius: 3
   _elevation: 0.5
   _drawDebug: 1
-  _test: 1
+  _test: 0
 --- !u!1 &728167939
 GameObject:
   m_ObjectHideFlags: 0
@@ -6614,7 +6614,7 @@ MonoBehaviour:
   _targetFrameRate: 60
   _runInBackground: 1
   _enableVSync: 1
-  _vSyncCount: 3
+  _vSyncCount: 4
 --- !u!4 &1928054228
 Transform:
   m_ObjectHideFlags: 0
