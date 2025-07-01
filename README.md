@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Unity Version](https://img.shields.io/badge/Unity-2022.3%2B-blue.svg)](https://unity.com/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/TJU-Aerial-Robotics/VoxelGenerator)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/TJU-Aerial-Robotics/YOPO-Sim)
 
 A high-performance, multi-sensor supported off-road environment simulator based on the Unity engine.
 
@@ -23,13 +23,13 @@ A high-performance, multi-sensor supported off-road environment simulator based 
 
 ### Standalone Version
 
-You can download the latest binary version from the [Releases](https://github.com/your-username/YOPO-Sim-WIP/releases) page.
+You can download the latest binary version from the [Releases](https://github.com/TJU-Aerial-Robotics/YOPO-Sim/releases) page.
 
 ### Editor Version
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/YOPO-Sim-WIP.git
+   git clone https://github.com/TJU-Aerial-Robotics/YOPO-Sim.git
    ```
 2. Install Unity Hub and the required version of Unity (2022 or newer).
    - Download Unity Hub from [Unity's official website](https://unity.com/download).
