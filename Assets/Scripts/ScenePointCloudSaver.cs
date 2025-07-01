@@ -14,6 +14,7 @@
  *  limitations under the License.
  */
 
+#if VISTA
 using System.Collections;
 using Pinwheel.Vista;
 using UnityEngine;
@@ -51,3 +52,4 @@ namespace YOPO.SIM {
         }
     }
 }
+#endif

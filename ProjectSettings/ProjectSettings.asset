@@ -814,7 +814,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: ROS2;VISTA
+    Standalone: ROS2
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
