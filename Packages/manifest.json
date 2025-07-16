@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "com.frj.unity-sensors": "https://github.com/Bob-Eric/UnitySensors.git?path=/Packages/UnitySensors#dev/new-file-structure",
-    "com.frj.unity-sensors-ros": "https://github.com/Bob-Eric/UnitySensors.git?path=/Packages/UnitySensorsROS#dev/new-file-structure",
+    "com.frj.unity-sensors": "https://github.com/Bob-Eric/UnitySensors.git?path=/Packages/UnitySensors#dev/working",
+    "com.frj.unity-sensors-ros": "https://github.com/Bob-Eric/UnitySensors.git?path=/Packages/UnitySensorsROS#dev/working",
     "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
     "com.tju-aerial-robotics.voxel-generator": "https://github.com/TJU-Aerial-Robotics/VoxelGenerator.git?path=/Packages/VoxelGenerator#v1.0.0",
     "com.unity.cinemachine": "2.10.4",
