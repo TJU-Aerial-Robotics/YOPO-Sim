@@ -126,6 +126,7 @@ namespace Diablo {
             CarControl(Time.fixedDeltaTime);
         }
 
+        // Reference: https://youtu.be/qdskE8PJy6Q?si=fboWvuEhdN0_f54U&t=179
         private void UpdateUprightForce() {
             var currentRotation = transform.rotation;
             var targetRotation = Quaternion.Euler(0, targetEularAngleY, 0);
